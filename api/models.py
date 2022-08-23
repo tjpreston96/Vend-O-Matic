@@ -16,7 +16,7 @@ class Item(models.Model):
     )
 
     def __str__(self):
-        return self.id
+        return f"self.id"
 
     class Meta:
         ordering = ["id"]
