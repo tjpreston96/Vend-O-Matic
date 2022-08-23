@@ -1,4 +1,8 @@
+from rest_framework import status
 from rest_framework.response import Response
+
+from .models import Currency, Item
+from .serializers import CurrencySerializer, ItemSerializer
 
 
 def get_routes(request):
@@ -18,3 +22,15 @@ def get_routes(request):
     ]
 
     return Response(routes)
+
+
+def add_coin(request):
+    quantity = Currency.objects.first().quantity
+    return Response(
+        request.data, status=status.HTTP_204_NO_CONTENT, headers={"X-Coins": quantity}
+    )
+
+
+# {
+#     "coin": 1
+# }
