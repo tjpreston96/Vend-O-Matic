@@ -1,3 +1,4 @@
+from turtle import update
 from rest_framework import status
 from rest_framework.response import Response
 
@@ -39,6 +40,14 @@ def add_coin(request):
     return Response(
         status=status.HTTP_406_NOT_ACCEPTABLE, headers={"X-Coins": coin.quantity}
     )
+
+
+def refund_coins(request):
+    coin = Currency.objects.first()
+    refund = coin.quantity
+    coin.quantity = 0
+    coin.save(update_fields=["quantity"])
+    return Response(status=status.HTTP_204_NO_CONTENT, headers={"X-Coins": refund})
 
 
 # {
