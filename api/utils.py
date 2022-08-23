@@ -50,6 +50,11 @@ def refund_coins(request):
     return Response(status=status.HTTP_204_NO_CONTENT, headers={"X-Coins": refund})
 
 
+def inventory_list(request):
+    inventory = [item.quantity for item in Item.objects.all()]
+    return Response(inventory, status=status.HTTP_200_OK)
+
+
 # {
 #     "coin": 1
 # }
