@@ -25,9 +25,19 @@ def get_routes(request):
 
 
 def add_coin(request):
-    quantity = Currency.objects.first().quantity
+    coin = Currency.objects.first()
+
+    if request.data["coin"] == 1:
+        coin.quantity += 1
+        coin.save(update_fields=["quantity"])
+
+        return Response(
+            status=status.HTTP_204_NO_CONTENT,
+            headers={"X-Coins": coin.quantity},
+        )
+
     return Response(
-        request.data, status=status.HTTP_204_NO_CONTENT, headers={"X-Coins": quantity}
+        status=status.HTTP_406_NOT_ACCEPTABLE, headers={"X-Coins": coin.quantity}
     )
 
 
