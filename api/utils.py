@@ -55,6 +55,11 @@ def inventory_list(request):
     return Response(inventory, status=status.HTTP_200_OK)
 
 
+def get_quantity(request, pk):
+    item = Item.objects.get(id=pk)
+    return Response(item.quantity, status=status.HTTP_200_OK)
+
+
 # {
 #     "coin": 1
 # }
