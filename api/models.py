@@ -12,11 +12,16 @@ class Currency(models.Model):
 
 class Item(models.Model):
     quantity = models.PositiveIntegerField(
-        default=5, validators=[MinValueValidator(0), MaxValueValidator(5)]
+        default=5,
+        validators=[MinValueValidator(0), MaxValueValidator(5)],
+    )
+    price = models.PositiveIntegerField(
+        default=2,
+        validators=[MinValueValidator(0)],
     )
 
     def __str__(self):
-        return f"self.id"
+        return f"{self.id}"
 
     class Meta:
         ordering = ["id"]
