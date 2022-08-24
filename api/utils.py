@@ -25,6 +25,12 @@ def get_routes(request):
     return Response(routes)
 
 
+def landing(request):
+    coins = Currency.objects.first().quantity
+    welcome = "Welcome to the Vend-O-Matic Browsable API. To view all possible actions navigate to ['/routes']"
+    return Response(welcome, status=status.HTTP_200_OK, headers={"X-Coins": coins})
+
+
 def add_coin(request):
     coin = Currency.objects.first()
 
@@ -55,9 +61,33 @@ def inventory_list(request):
     return Response(inventory, status=status.HTTP_200_OK)
 
 
-def get_quantity(request, pk):
+def get_item_quantity(request, pk):
     item = Item.objects.get(id=pk)
     return Response(item.quantity, status=status.HTTP_200_OK)
+
+
+def vend_item(request, pk):
+    item = Item.objects.get(id=pk)
+    coin = Currency.objects.first()
+    coins = coin.quantity
+
+    if item.quantity == 0:
+        return Response(status=status.HTTP_404_NOT_FOUND, headers={"X-Coins": coins})
+    elif coins < item.price:
+        return Response(status=status.HTTP_403_FORBIDDEN, headers={"X-Coins": coins})
+    else:
+        change = coins - item.price
+        item.quantity -= 1
+        coin.quantity = 0
+
+        item.save(update_fields=["quantity"])
+        coin.save(update_fields=["quantity"])
+
+        return Response(
+            {"quantity": 1},
+            status=status.HTTP_200_OK,
+            headers={"X-Coins": change, "X-Inventory-Remaining": item.quantity},
+        )
 
 
 # {
