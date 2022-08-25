@@ -5,8 +5,9 @@ from .models import Currency, Item
 
 
 def landing(request):
+    coins = Currency.objects.first().quantity
     welcome = "Welcome to the Vend-O-Matic Browsable API. To view all possible actions, please navigate to ['/routes']."
-    return Response(welcome, status=status.HTTP_200_OK)
+    return Response(welcome, status=status.HTTP_200_OK, headers={"X-Coins": coins})
 
 
 def add_coin(request):
