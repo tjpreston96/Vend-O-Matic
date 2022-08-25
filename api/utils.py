@@ -125,6 +125,12 @@ def get_routes(request):
             "Body": None,
             "Description": "Vend-O-Matic vends a beverage to customer. Response contains a 200 status code, a response body containing # of items vended, and headers containing # of coins returned and item inventory remaining.",
         },
+        {
+            "Endpoint": "restore",
+            "Method": "PUT",
+            "Body": None,
+            "Description": "Restock and reset Vend-O-Matic. Response contains a 418 status code, a response body containing a list of item quanitities, and headers containing # of coins.",
+        },
     ]
 
     return Response(routes)
