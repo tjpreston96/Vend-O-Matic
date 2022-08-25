@@ -5,9 +5,9 @@
 ### [Trello](https://trello.com/b/wlLE03H0/vend-o-matic)
 
 ## Docker
-| Image                              | Image ID    |  Tag        |  Size       |
-| -----------                        | ----------- | ----------- | ----------- |
-| tpreston96/emma-assessment_web     | 92be66af5a90| latest      |  1.01 GB    |
+| Image                          | Image ID    |  Tag        |  Size       |
+| ------------------------------ | ----------- | ----------- | ----------- |
+| tpreston96/emma-assessment_web | 92be66af5a90| latest      |  1.01 GB    |
 
 
 ## Instructions
@@ -19,7 +19,7 @@
 
 ## Local Instructions
 
-1. git clone https://github.com/tjpreston96/Vend-O-Matic.git <preferred_dir_name>
+1. `git clone https://github.com/tjpreston96/Vend-O-Matic.git <preferred_dir_name>`
 2. cd into directory and open IDE
 3. `touch .env` in vendomatic directory containing:
 ```
