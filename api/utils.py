@@ -69,6 +69,30 @@ def vend_item(request, pk):
         )
 
 
+def confirm_restore(request):
+    confirmation = "Send 'PUT' request to restore and restock Vend-O-Matic."
+    return Response(confirmation, status=status.HTTP_200_OK)
+
+
+def restock_and_restore(request):
+    def restock(item):
+        item.quantity = 5
+        item.save(update_fields=["quantity"])
+
+    [restock(item) for item in Item.objects.all()]
+    inventory = [item.quantity for item in Item.objects.all()]
+
+    coin = Currency.objects.first()
+    coin.quantity = 0
+    coin.save(update_fields=["quantity"])
+
+    return Response(
+        inventory,
+        status=status.HTTP_418_IM_A_TEAPOT,
+        headers={"X-Coins": coin.quantity},
+    )
+
+
 def get_routes(request):
     routes = [
         {

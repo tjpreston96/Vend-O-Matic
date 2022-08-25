@@ -2,11 +2,13 @@ from rest_framework.decorators import api_view
 
 from .utils import (
     add_coin,
+    confirm_restore,
     get_item_quantity,
     get_routes,
     inventory_list,
     landing,
     refund_coins,
+    restock_and_restore,
     vend_item,
 )
 
@@ -18,9 +20,9 @@ def routes_list(request):
     return get_routes(request)
 
 
-@api_view(["GET","PUT", "DELETE"])
+@api_view(["GET", "PUT", "DELETE"])
 def add_or_refund_coins(request):
-    if request.method == 'GET':
+    if request.method == "GET":
         return landing(request)
     if request.method == "PUT":
         return add_coin(request)
@@ -39,3 +41,11 @@ def get_item(request, pk):
         return get_item_quantity(request, pk)
     if request.method == "PUT":
         return vend_item(request, pk)
+
+
+@api_view(["GET", "PUT"])
+def restore(request):
+    if request.method == "GET":
+        return confirm_restore(request)
+    if request.method == "PUT":
+        return restock_and_restore(request)
