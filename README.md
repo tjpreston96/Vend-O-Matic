@@ -7,7 +7,7 @@
 ## Docker
 | Image                              | Image ID    |  Tag        |  Size       |
 | -----------                        | ----------- | ----------- | ----------- |
-| tpreston96/emma-assessment_web     | 92be66af5a90| latest      |  1.01GB     |
+| tpreston96/emma-assessment_web     | 92be66af5a90| latest      |  1.01 GB    |
 
 
 ## Instructions
