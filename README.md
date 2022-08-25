@@ -5,9 +5,9 @@
 ### [Trello](https://trello.com/b/wlLE03H0/vend-o-matic)
 
 ## Docker
-| Image                              | Image ID    |  Tag        |
-| -----------                        | ----------- | ----------- |
-| tpreston96/emma-assessment_web     | 92be66af5a90| latest      |
+| Image                              | Image ID    |  Tag        |  Size       |
+| -----------                        | ----------- | ----------- | ----------- |
+| tpreston96/emma-assessment_web     | 92be66af5a90| latest      |  1.01GB     |
 
 
 ## Instructions
