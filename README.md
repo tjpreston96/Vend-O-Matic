@@ -20,22 +20,24 @@
 ## Local Instructions
 
 1. git clone https://github.com/tjpreston96/Vend-O-Matic.git <preferred_dir_name>
-2. cd into directory
-3. Open IDE
-4. `touch .env` in vendomatic directory containing:
+2. cd into directory and open IDE
+3. `touch .env` in vendomatic directory containing:
 ```
 SECRET_KEY=<Contact_Repository_Owner>
 DEBUG=<desired_debug_bool>
 ```
-5. In CLI run: `docker compose up`
-6. If web container fails on first compose, please wait for db container to initialize
-7. Run: `docker compose down` && `docker compose up`
-8. Attach shell to web container or run: `docker exec -it <web_container_id> bash`
-9. In web container CLI run: `python manage.py showmigrations` && `python manage.py migrate`
-10. In web container CLI run: `python manage.py createsuperuser` && fill out information
-11. Close web container CLI
-12. Navigate to localhost:8000/admin && log into admin console
-13. Create 1 Currency named "coin" with the default quantity
-14. Create 3 Items with default values
-15. Click `View Site` on top right navbar
-16. Enjoy!
+4. In CLI run: `docker compose up`
+> If web container fails on first compose, please wait for db container to initialize
+5. Run: `docker compose down` and `docker compose up`
+6. Attach shell to web container or run: `docker exec -it <web_container_id> bash`
+7. In web container CLI run: 
+    1. `python manage.py showmigrations`
+    2. `python manage.py migrate`
+    3. `python manage.py createsuperuser` and fill out information
+8. Close web container CLI
+9. Navigate to localhost:8000/admin
+10. Log in and create:
+    1. 1 Currency named 'coin' with default quantity
+    2. 3 Items with default values
+11. Click `View Site` on top right navbar
+12. Enjoy!
