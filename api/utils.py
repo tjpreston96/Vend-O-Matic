@@ -50,10 +50,10 @@ def vend_item(request, pk):
     coin = Currency.objects.first()
     coins = coin.quantity
 
-    if item.quantity == 0:
-        return Response(status=status.HTTP_404_NOT_FOUND, headers={"X-Coins": coins})
-    elif coins < item.price:
+    if coins < item.price:
         return Response(status=status.HTTP_403_FORBIDDEN, headers={"X-Coins": coins})
+    elif item.quantity == 0:
+        return Response(status=status.HTTP_404_NOT_FOUND, headers={"X-Coins": coins})
     else:
         change = coins - item.price
         item.quantity -= 1
