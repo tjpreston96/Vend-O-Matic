@@ -47,4 +47,4 @@ DEBUG=<desired_debug_bool>
 
 1. In CLI run: `docker compose up`
 2. Attach shell to web container or run: `docker exec -it <web_container_id> bash`
-3. In web container CLI run: `./manage.py test` or `./manage.py test api.tests.{model_name}TestCase`
+3. In web container CLI run: `./manage.py test` or `./manage.py test api.tests.<model_name>TestCase`
