@@ -58,3 +58,11 @@ class CurrencyTestCase(TestCase):
         self.assertEqual(response.status_code, 204)
         self.assertEqual(int(response.headers["X-Coins"]), refund)
         self.assertEqual(currency.quantity, 0)
+
+
+class ItemTestCase(TestCase):
+    def setUp(self) -> None:
+        [Item.objects.create() for i in range(3)]
+
+    def test_item_creation(self) -> None:
+        self.assertEqual(len(Item.objects.all()), 3)
