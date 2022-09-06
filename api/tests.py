@@ -25,6 +25,10 @@ class CurrencyTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(int(response.headers["X-Coins"]), currency.quantity)
 
+    def test_routes(self) -> None:
+        response = client.get("/routes/")
+        self.assertEqual(response.status_code, 200)
+
     def test_invalid_add_coin(self) -> None:
         # Invalid key
         response = client.put("/", {"quarter": 1}, format="json")
@@ -100,3 +104,5 @@ class ItemTestCase(TestCase):
         response = client.put("/inventory/10/")
         self.assertEqual(response.status_code, 404)
         self.assertEqual(int(response.headers["X-Coins"]), 2)
+
+  
