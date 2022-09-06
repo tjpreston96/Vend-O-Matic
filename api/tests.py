@@ -17,3 +17,9 @@ class CurrencyTestCase(TestCase):
         self.assertEqual(len(Currency.objects.all()), 1)
         self.assertEqual(self.currency.name, "coin")
         self.assertEqual(self.currency.quantity, 0)
+
+    def test_landing(self) -> None:
+        response = client.get("/")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(int(response.headers["X-Coins"]), self.currency.quantity)
