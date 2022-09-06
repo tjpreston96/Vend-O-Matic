@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-# Extends default client class
+# Extends default Client class
 from rest_framework.test import APIClient
 
 from .models import Currency, Item
@@ -104,5 +104,3 @@ class ItemTestCase(TestCase):
         response = client.put("/inventory/10/")
         self.assertEqual(response.status_code, 404)
         self.assertEqual(int(response.headers["X-Coins"]), 2)
-
-  
