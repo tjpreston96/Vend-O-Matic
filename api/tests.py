@@ -34,4 +34,9 @@ class CurrencyTestCase(TestCase):
 
         self.assertEqual(response.status_code, 204)
         self.assertEqual(currency.quantity, 1)
-        
+
+        response = client.put("/", {"coin": 3}, format="json")
+        self.assertEqual(response.status_code, 406)
+
+        response = client.put("/", {"quarter": 1}, format="json")
+        self.assertEqual(response.status_code, 406)
