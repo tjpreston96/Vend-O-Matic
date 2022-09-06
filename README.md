@@ -41,3 +41,10 @@ DEBUG=<desired_debug_bool>
     2. 3 Items with default values
 11. Click `View Site` on top right navbar
 12. Enjoy!
+
+
+## Testing Instructions
+
+1. In CLI run: `docker compose up`
+2. Attach shell to web container or run: `docker exec -it <web_container_id> bash`
+3. In web container CLI run: `./manage.py test` or `./manage.py test api.tests.{model_name}TestCase`
