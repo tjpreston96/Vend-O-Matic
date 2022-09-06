@@ -62,7 +62,41 @@ class CurrencyTestCase(TestCase):
 
 class ItemTestCase(TestCase):
     def setUp(self) -> None:
-        [Item.objects.create() for i in range(3)]
+        # Create Currency w/ quantity of 3
+        Currency.objects.create(name="coin", quantity=3)
+        # Create 3 Items with quantity of 1
+        [Item.objects.create(quantity=1) for i in range(3)]
 
     def test_item_creation(self) -> None:
         self.assertEqual(len(Item.objects.all()), 3)
+
+    def test_inventory_list(self) -> None:
+        response = client.get("/inventory/")
+        self.assertEqual(type(response.data), list)
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_item_quanity(self) -> None:
+        response = client.get("/inventory/1/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(type(response.data), int)
+
+    def test_vend_item(self) -> None:
+        # Successful transaction (200)
+        response = client.put("/inventory/10/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(int(response.headers["X-Coins"]), 1)
+        self.assertEqual(int(response.headers["X-Inventory-Remaining"]), 0)
+
+        # Insufficient coins (403)
+        response = client.put("/inventory/11/")
+        self.assertEqual(response.status_code, 403)
+        self.assertEqual(int(response.headers["X-Coins"]), 0)
+
+        # Insert 2 coins
+        client.put("/", {"coin": 1}, format="json")
+        client.put("/", {"coin": 1}, format="json")
+
+        # Out of stock (404)
+        response = client.put("/inventory/10/")
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(int(response.headers["X-Coins"]), 2)
