@@ -13,7 +13,7 @@ def landing(request):
 def add_coin(request):
     coin = Currency.objects.first()
 
-    if 'coin' in request.data and request.data['coin'] == 1:
+    if "coin" in request.data and request.data["coin"] == 1:
         coin.quantity += 1
         coin.save(update_fields=["quantity"])
 
