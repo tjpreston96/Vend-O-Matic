@@ -46,8 +46,15 @@ class CurrencyTestCase(TestCase):
         self.assertEqual(currency.quantity, 1)
 
         # Multiple k:v pairs
-        response = client.put("/", {"coin": 1, "quarter": 2, "taco": 1}, format="json")
+        response = client.put("/", {"quarter": 2, "coin": 1, "taco": 1}, format="json")
         currency = Currency.objects.first()
         self.assertEqual(response.status_code, 204)
         self.assertEqual(currency.quantity, 2)
 
+    def test_refund_coins(self) -> None:
+        refund = Currency.objects.first().quantity
+        response = client.delete("/")
+        currency = Currency.objects.first()
+        self.assertEqual(response.status_code, 204)
+        self.assertEqual(int(response.headers["X-Coins"]), refund)
+        self.assertEqual(currency.quantity, 0)
